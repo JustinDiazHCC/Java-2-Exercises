@@ -16,11 +16,11 @@ import java.nio.file.Paths;
 public class JobApplicants {
     public static void main(String[] args) {
         // input file
-        String inputFileName = "input-files/applicants.csv";
+        String inputFileName = "_15-Job-Applicants/input-files/applicants.csv";
         Path inputFile = Paths.get(inputFileName);
 
         //output file
-        Path outputFile = Paths.get("output-files/emails.txt");
+        Path outputFile = Paths.get("_15-Job-Applicants/output-files/emails.txt");
 
         // Scanner object to read input file
         try (Scanner inputFileScanner = new Scanner(inputFile)) {

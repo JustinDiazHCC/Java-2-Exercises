@@ -17,11 +17,11 @@ import java.util.Scanner;
 public class FormatContactList {
     public static void main(String[] args) {
         // input file
-        String inputFileName = "input-files/contacts.txt";
+        String inputFileName = "_15-Format-Contact-List/input-files/contacts.txt";
         Path inputFile = Paths.get(inputFileName);
 
         // output file
-        Path outputFile = Paths.get("output-files/formatted-contacts.txt");
+        Path outputFile = Paths.get("_15-Format-Contact-List/output-files/formatted-contacts.txt");
 
         // Scanner object to read input file
         try (Scanner inputFileScanner = new Scanner(inputFile)) {
