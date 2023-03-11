@@ -1,11 +1,8 @@
 package planets;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-/** 
+/**
  * Prints facts about planets - practice using Collections methods
  */
 public class PlanetsMain {
@@ -24,46 +21,72 @@ public class PlanetsMain {
         planets.add(new Planet("Neptune", 102, 4495));
         planets.add(new Planet("Pluto", 0.0146, 5906));
 
-        System.out.println("Orignal order:");
+        System.out.println("Original order:");
         printPlanets(planets);
 
         // Randomize the order of the planets
-        // TODO
-        
+        Collections.shuffle(planets);
+
         System.out.println("Planets in a random order:");
         printPlanets(planets);
 
         // Remove pluto
-        // TODO
-                
+        Iterator itr = planets.iterator();
+        Planet element;
+        while (itr.hasNext()) {
+            element = (Planet) itr.next();
+            if (element.getName().equals("Pluto")) {
+                itr.remove();
+            }
+        }
+
         System.out.println("Removed Pluto:");
         printPlanets(planets);
 
         // Sort by distance from sun using Natural Ordering (Hint: Implement Planet.compareTo)
-
+        Collections.sort(planets);
         System.out.println("Sorted by distance from sun:");
         printPlanets(planets);
 
         // Sort alphabetically (Hint: you need a Comparator class)
-        // TODO
-        
+        Collections.sort(planets, new Comparator<Planet>() {
+            @Override
+            public int compare(Planet o1, Planet o2) {
+                return o1.getName().compareTo(o2.getName());
+            }
+        });
+
         System.out.println("Sorted alphabetically:");
         printPlanets(planets);
 
         // Sort by mass (Hint: you need a Comparator class)
-        // TODO
-        
+        Collections.sort(planets, new Comparator<Planet>() {
+            @Override
+            public int compare(Planet o1, Planet o2) {
+                double diff = o1.getMass() - o2.getMass();
+                if (diff < 0) {
+                    return -1;
+                } else if (diff == 0) {
+                    return 0;
+                } else { // diff must be positive if neither negative nor 0
+                    return 1;
+                }
+            }
+        });
+
         System.out.println("Sorted by mass:");
         printPlanets(planets);
 
         // Add each planet in your list to a Map (name => Planet)
         Map<String, Planet> planetMap = new HashMap<>();
         // Hint - use an enhanced for loop
-        // TODO
+        for (Planet planet : planets) {
+            planetMap.put(planet.getName(), planet);
+        }
 
         System.out.println("Earth:" + planetMap.get("Earth"));
         // Retrieve and print Mars
-        // TODO
+        System.out.println("Mars: " + planetMap.get("Mars"));
 
     }
 

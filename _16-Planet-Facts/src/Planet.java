@@ -23,9 +23,9 @@ class Planet implements Comparable<Planet> {
     }
 
     @Override
-    public int compareTo(Planet other) {        
-        // TODO
-        return 0;        
+    public int compareTo(Planet other) {
+        Integer distance = this.getDistance();
+        return distance.compareTo(other.getDistance());
     }
 
     public String getName() {
