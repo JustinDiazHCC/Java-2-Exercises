@@ -41,7 +41,7 @@ public class GizmoMain {
             System.out.print("""
                     Please choose an option:
                     1. Add a new entry
-                    2. Remove an entry specified by the user
+                    2. Remove an entry
                     3. Sort the list by year
                     4. Sort the list by price
                     5. Sort the list by quantity
@@ -75,13 +75,22 @@ public class GizmoMain {
                     boolean validNewEntry;
                     do {
                         try {
+                            System.out.println("Enter product name:");
                             String newName = input.nextLine();
+
+                            System.out.println("Enter product number:");
                             int newNumber = input.nextInt();
                             input.nextLine(); // clear keyboard buffer
+
+                            System.out.println("Enter year:");
                             int newYear = input.nextInt();
                             input.nextLine(); // clear keyboard buffer
+
+                            System.out.println("Enter quantity:");
                             int newQuantity = input.nextInt();
                             input.nextLine(); // clear keyboard buffer
+
+                            System.out.println("Enter price:");
                             double newPrice = input.nextDouble();
                             input.nextLine(); // clear keyboard buffer
 
@@ -98,31 +107,27 @@ public class GizmoMain {
                     } while (!validNewEntry);
                     break;
                 case REMOVE_ENTRY:
-                    boolean validRemoveEntry = false;
+                    boolean validRemoveEntry;
+                    int removeEntry;
                     do {
                         try {
                             System.out.println("Current entries:");
-                            for (Gizmo gizmo : gizmos) {
-                                System.out.print(gizmo + "\n");
+                            for (int i = 0; i < gizmos.size(); i++) {
+                                System.out.printf(i + ": " + gizmos.get(i) + "\n");
                             }
-                            System.out.println("Enter the product name of the entry you would like to remove (case sensitive):");
-                            String removeEntry = input.nextLine();
-                            // ensure the user entry matches a product in the list
-                            boolean atLeastOneMatch = false;
-                            for (Gizmo gizmo : gizmos) {
-                                if (gizmo.getName().equals(removeEntry)) {
-                                    gizmos.remove(gizmo);
-                                    // set off a flag to ensure at lease one gizmo matches user entry
-                                    atLeastOneMatch = true;
-                                    validRemoveEntry = true;
-                                }
-                            }
-                            if (!atLeastOneMatch) {
-                                System.err.println("There are no products that match the name you entered. Please try again.");
-                            }
+                            System.out.println("Enter the index of the entry you would like to remove:");
+                            removeEntry = input.nextInt();
+                            input.nextLine();
+                            gizmos.remove(removeEntry);
+                            validRemoveEntry = true;
                         } catch (InputMismatchException e) {
                             // validate correct input type
+                            // TODO prevent infinite loop
                             System.err.println("Invalid entry. Please try again.");
+                            validRemoveEntry = false;
+                        } catch (IndexOutOfBoundsException e) {
+                            // validate correct index
+                            System.err.println("Invalid selection. Please try again.");
                             validRemoveEntry = false;
                         }
                     } while (!validRemoveEntry);
@@ -136,6 +141,11 @@ public class GizmoMain {
                 case PRINT_TOTAL_VALUE:
                     break;
                 case PRINT_INVENTORY:
+                    System.out.printf("%-10s%-10s%-8s%-10s%-8s\n", "Name", "Number", "Year", "Quantity", "Price");
+                    for (Gizmo gizmo : gizmos) {
+                        System.out.printf("%-10s%-10d%-8d%-10d%-8.2f\n", gizmo.getName(), gizmo.getNumber(),
+                                gizmo.getYear(), gizmo.getQuantity(), gizmo.getPrice());
+                    }
                     break;
                 case QUIT:
                     break;
