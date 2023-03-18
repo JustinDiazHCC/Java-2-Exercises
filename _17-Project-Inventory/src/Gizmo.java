@@ -5,7 +5,7 @@
  * @version 1.0
  * @author Justin Diaz
  */
-public class Gizmo {
+public class Gizmo implements Comparable<Gizmo>{
 
     // instance variables
     protected String name;
@@ -83,5 +83,11 @@ public class Gizmo {
                 ", quantity=" + quantity +
                 ", price=" + price +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Gizmo other) {
+        Integer year = this.getYear();
+        return year.compareTo(other.getYear());
     }
 } // end class Gizmo

@@ -6,10 +6,7 @@
  * @author Justin Diaz
  */
 
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class GizmoMain {
     public static void main(String[] args) {
@@ -133,12 +130,46 @@ public class GizmoMain {
                     } while (!validRemoveEntry);
                     break;
                 case SORT_BY_YEAR:
+                    System.out.println("Sorting entries by year.");
+                    Collections.sort(gizmos);
                     break;
                 case SORT_BY_PRICE:
+                    System.out.println("Sorting entries by price.");
+                    gizmos.sort(new Comparator<Gizmo>() {
+                        @Override
+                        public int compare(Gizmo o1, Gizmo o2) {
+                            double diff = o1.getPrice() - o2.getPrice();
+                            if (diff < 0) {
+                                return -1;
+                            } else if (diff == 0) {
+                                return 0;
+                            } else { // diff must be positive if neither negative nor 0
+                                return 1;
+                            }
+                        }
+                    });
                     break;
                 case SORT_BY_QUANTITY:
+                    System.out.println("Sorting entries by quantity.");
+                    gizmos.sort(new Comparator<Gizmo>() {
+                        @Override
+                        public int compare(Gizmo o1, Gizmo o2) {
+                            double diff = o1.getQuantity() - o2.getQuantity();
+                            if (diff < 0) {
+                                return -1;
+                            } else if (diff == 0) {
+                                return 0;
+                            } else { // diff must be positive if neither negative nor 0
+                                return 1;
+                            }
+                        }
+                    });
                     break;
                 case PRINT_TOTAL_VALUE:
+                    // TODO fix stream:
+                    double total = gizmos.stream()
+                            .map(Gizmo::getPrice).reduce((double) 0, Double::sum);
+                    System.out.printf("Total value of inventory: $%.2f\n", total);
                     break;
                 case PRINT_INVENTORY:
                     System.out.printf("%-10s%-10s%-8s%-10s%-8s\n", "Name", "Number", "Year", "Quantity", "Price");
