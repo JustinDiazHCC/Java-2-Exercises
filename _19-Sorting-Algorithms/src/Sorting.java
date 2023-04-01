@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * Sorting.java
@@ -28,8 +25,17 @@ public class Sorting {
         // empty line for output whitespace
         System.out.println();
 
+        List<Integer> shuffledNumbers = new LinkedList<Integer>();
+        for (int number : shuffledNumbers) {
+            shuffledNumbers.add(number + 1);
+        }
+        for(int number : shuffledNumbers) {
+            System.out.println(number);
+        }
+
+
         // shuffle contents of numbers array
-        List<Integer> shuffledNumbers = Arrays.asList(numbersArray);
+        shuffledNumbers = Arrays.asList(numbersArray);
         Collections.shuffle(shuffledNumbers);
         shuffledNumbers.toArray();
 
