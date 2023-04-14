@@ -20,6 +20,9 @@ public class Search {
 
         // create a PlaceholderBinaryTreeSimpleMap for each line
         SimpleMap<Integer, String> lineMap = new PlaceholderBinaryTreeSimpleMap<>();
+        /**
+         using PlaceholderBinaryTreeSimpleMap
+         */
         // create a PlaceholderBinaryTreeSimpleMap for each word
         SimpleMap<String, ArrayList<Integer>> indexMap = new PlaceholderBinaryTreeSimpleMap<>();
 
