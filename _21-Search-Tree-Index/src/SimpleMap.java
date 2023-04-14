@@ -1,5 +1,3 @@
-package edu.howardcc.cmsy167.simplemap;
-
 /**
  * Simplified version of the Map<K,V> interface
  */

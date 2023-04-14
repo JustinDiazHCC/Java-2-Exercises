@@ -1,5 +1,3 @@
-package edu.howardcc.cmsy167.simplemap;
-
 import java.util.Map;
 import java.util.TreeMap;
 

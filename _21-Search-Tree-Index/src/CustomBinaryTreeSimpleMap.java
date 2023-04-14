@@ -1,5 +1,3 @@
-package edu.howardcc.cmsy167.simplemap;
-
 /**
  * Implementation of SimpleMap using a custom binary search tree
  */
