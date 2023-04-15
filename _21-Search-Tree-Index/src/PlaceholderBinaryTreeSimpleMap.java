@@ -8,9 +8,7 @@ public class PlaceholderBinaryTreeSimpleMap<K extends Comparable<K>, V> implemen
 
     private final Map<K, V> map;
 
-    public PlaceholderBinaryTreeSimpleMap() {
-        map = new TreeMap<>();
-    }        
+    public PlaceholderBinaryTreeSimpleMap() { map = new TreeMap<>(); }
 
     @Override
     public void clear() {
