@@ -3,7 +3,7 @@
  * A program to prompt user file input and allow for the user to search for a word in the file
  *
  * @author Justin Diaz
- * @version 1.0
+ * @version 1.1
  */
 
 import java.io.IOException;
@@ -19,12 +19,12 @@ public class Search {
         Scanner input = new Scanner(System.in);
 
         // create a PlaceholderBinaryTreeSimpleMap for each line
-        SimpleMap<Integer, String> lineMap = new PlaceholderBinaryTreeSimpleMap<>();
+        SimpleMap<Integer, String> lineMap = new CustomBinaryTreeSimpleMap<>();
         /**
-         using PlaceholderBinaryTreeSimpleMap
+         using CustomBinaryTreeSimpleMap
          */
         // create a PlaceholderBinaryTreeSimpleMap for each word
-        SimpleMap<String, ArrayList<Integer>> indexMap = new PlaceholderBinaryTreeSimpleMap<>();
+        SimpleMap<String, ArrayList<Integer>> indexMap = new CustomBinaryTreeSimpleMap<>();
 
         // prompt user file input
         System.out.println("Please enter the name of a file:");
