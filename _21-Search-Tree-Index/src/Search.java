@@ -18,12 +18,12 @@ public class Search {
         // Scanner object
         Scanner input = new Scanner(System.in);
 
-        // create a PlaceholderBinaryTreeSimpleMap for each line
+        // create a CustomBinaryTreeSimpleMap for each line
         SimpleMap<Integer, String> lineMap = new CustomBinaryTreeSimpleMap<>();
         /**
          using CustomBinaryTreeSimpleMap
          */
-        // create a PlaceholderBinaryTreeSimpleMap for each word
+        // create a CustomBinaryTreeSimpleMap for each word
         SimpleMap<String, ArrayList<Integer>> indexMap = new CustomBinaryTreeSimpleMap<>();
 
         // prompt user file input
