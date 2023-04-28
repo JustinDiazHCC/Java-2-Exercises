@@ -1,16 +1,15 @@
-package edu.howardcc.cmsy167;
+/**
+ * MonteCarloPi.java
+ * Driver for Monte Carlo Pi estimation
+ */
 
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Random;
-
-/**
- * Driver for Monte Carlo Pi estimation
- */
 public class MonteCarloPi {
 
-    public static final int NUM_THREADS = 1;
-    public static final int NUM_ITERATIONS = 100_000_000;
+    public static final int NUM_THREADS = 8;
+    public static final int NUM_ITERATIONS = 100_000_000_0;
 
     public static void main(String[] args) {
 
