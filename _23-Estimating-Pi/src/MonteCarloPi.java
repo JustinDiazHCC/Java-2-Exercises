@@ -1,32 +1,31 @@
-/**
- * MonteCarloPi.java
- * Driver for Monte Carlo Pi estimation
- */
+package edu.howardcc.cmsy167;
 
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Random;
+
+/**
+ * Driver for Monte Carlo Pi estimation
+ */
 public class MonteCarloPi {
 
-    public static final int NUM_THREADS = 4;
+    public static final int NUM_THREADS = 1;
     public static final int NUM_ITERATIONS = 100_000_000;
-    public static int iterationsPerThread = NUM_ITERATIONS/NUM_THREADS;
-
-    public static PiCalculator piCalculator = new PiCalculator();
 
     public static void main(String[] args) {
 
         System.out.printf("Available Processors: %s\n", Runtime.getRuntime().availableProcessors());
 
-        Double piEstimate;
+        int iterationsPerThread = NUM_ITERATIONS/NUM_THREADS;
+        PiCalculator piCalculator = new PiCalculator(iterationsPerThread);
 
         Instant startTime = Instant.now();
-        piEstimate = piCalculator.getPiEstimate();
+        piCalculator.getPiEstimate();
         Instant finishTime = Instant.now();
 
         long timeInMilliseconds = Duration.between(startTime, finishTime).toMillis();
         System.out.printf("Approximation of Pi using %d iterations and %d thread(s) completed in %d milliseconds: %f\n",
-                NUM_ITERATIONS, NUM_THREADS, timeInMilliseconds, piEstimate);
+                NUM_ITERATIONS, NUM_THREADS, timeInMilliseconds, piCalculator.getPiEstimate());
 
     }
 
@@ -35,44 +34,31 @@ public class MonteCarloPi {
      */
     public static class PiCalculator {
 
-        protected int circlePoints;
-        protected int squarePoints;
+        private final int iterations;
 
-        public PiCalculator() {
-            this.circlePoints = 0;
-            this.squarePoints = 0;
+        public PiCalculator(int iterations) {
+            this.iterations = iterations;
         }
 
-        public static double getPiEstimate() {
+        public double getPiEstimate() {
 
-            for (int i = 0; i < NUM_THREADS; i++) {
-                MultithreadingMonteCarlo multithread = new MultithreadingMonteCarlo();
-                Thread thread = new Thread(multithread);
-                thread.start();
-            }
+                final Random random = new Random();
 
-            return 4.0 * ((double)piCalculator.circlePoints / (double)piCalculator.squarePoints);
-        }
-    }
+                int circlePoints = 0;
+                int squarePoints = 0;
 
-    /**
-     * Implements multithreading
-     */
-    public static class MultithreadingMonteCarlo implements Runnable{
-        @Override
-        public void run () {
-            final Random random = new Random();
+                for (int i = 0; i < iterations; i++) {
+                    double x = random.nextDouble();
+                    double y = random.nextDouble();
+                    double d = x*x + y*y;
 
-            for (int i = 0; i < iterationsPerThread; i++) {
-                double x = random.nextDouble();
-                double y = random.nextDouble();
-                double d = x*x + y*y;
-
-                if (d <= 1) {
-                    piCalculator.circlePoints++;
+                    if (d <= 1) {
+                        circlePoints++;
+                    }
+                    squarePoints++;
                 }
-                piCalculator.squarePoints++;
-            }
+
+            return 4.0 * ((double)circlePoints / (double)squarePoints);
         }
     }
 }
