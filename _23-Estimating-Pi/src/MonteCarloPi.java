@@ -10,24 +10,24 @@ public class MonteCarloPi {
     public static final int NUM_THREADS = 8;
     public static final int NUM_ITERATIONS = 2147483647;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         // print available processors
         System.out.printf("Available Processors: %s\n", Runtime.getRuntime().availableProcessors());
 
         int iterationsPerThread = NUM_ITERATIONS / NUM_THREADS;
-        PiCalculator [] piCalcArr = new PiCalculator[NUM_THREADS];
+        PiCalculator[] piCalcArr = new PiCalculator[NUM_THREADS];
 
-        Instant startTime = Instant.now(); //  start timer
+        Instant startTime = Instant.now(); // start timer
 
         // start each thread in piCalcArr
-        for(int i = 0; i < NUM_THREADS; i ++){
+        for (int i = 0; i < NUM_THREADS; i++) {
             piCalcArr[i] = new PiCalculator(iterationsPerThread);
             piCalcArr[i].start();
         }
 
         // halt program in loop until every thread terminates
-        for(int i = 0; i < NUM_THREADS; i ++){
+        for (int i = 0; i < NUM_THREADS; i++) {
             while (piCalcArr[i].isAlive()) {
             }
         }
@@ -41,7 +41,7 @@ public class MonteCarloPi {
 
         // calculate average
         double estimate = total / NUM_THREADS;
-        Instant finishTime = Instant.now(); //  end timer
+        Instant finishTime = Instant.now(); // end timer
 
         // print results
         long timeInMilliseconds = Duration.between(startTime, finishTime).toMillis();
@@ -64,7 +64,7 @@ public class MonteCarloPi {
         }
 
         @Override
-        public void run (){
+        public void run() {
             final Random random = new Random();
 
             for (int i = 0; i < iterations; i++) {
