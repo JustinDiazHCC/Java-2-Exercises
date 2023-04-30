@@ -119,7 +119,7 @@ public class GizmoMain {
                             validRemoveEntry = true;
                         } catch (InputMismatchException e) {
                             // validate correct input type
-                            // TODO prevent infinite loop
+                            // TO-DO prevent infinite loop
                             System.err.println("Invalid entry. Please try again.");
                             validRemoveEntry = false;
                         } catch (IndexOutOfBoundsException e) {
@@ -166,7 +166,7 @@ public class GizmoMain {
                     });
                     break;
                 case PRINT_TOTAL_VALUE:
-                    // TODO fix stream:
+                    // TO-DO fix stream:
                     double total = gizmos.stream()
                             .map(Gizmo::getPrice).reduce((double) 0, Double::sum);
                     System.out.printf("Total value of inventory: $%.2f\n", total);
